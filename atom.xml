@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>FDL&#39;s BLOG</title>
+  
+  <subtitle>Good choice.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://fudonglai.github.io/"/>
+  <updated>2018-10-18T11:44:20.234Z</updated>
+  <id>https://fudonglai.github.io/</id>
+  
+  <author>
+    <name>labuladong</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>LeetCode</title>
+    <link href="https://fudonglai.github.io/2018/10/18/LeetCode/"/>
+    <id>https://fudonglai.github.io/2018/10/18/LeetCode/</id>
+    <published>2018-10-18T11:12:34.000Z</published>
+    <updated>2018-10-18T11:44:20.234Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="“Top-down”-Solution"><a href="#“Top-down”-Solution" class="headerlink" title="“Top-down” Solution"></a>“Top-down” Solution</h3><p>When you meet a tree problem, ask yourself two questions: </p><ul><li>Can you determine some parameters to help the node know the answer of itself? </li><li>Can you use these parameters and the value of the node itself to determine what should be the parameters parsing to its children? </li></ul><a id="more"></a><p> If the answers are both <strong>yes</strong>, try to solve this problem using a “top-down” recursion solution.</p> <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">int</span> answer;       <span class="comment">// don't forget to initialize answer before call maximum_depth</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">maximum_depth</span><span class="params">(TreeNode* root, <span class="keyword">int</span> depth)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!root-&gt;left &amp;&amp; !root-&gt;right) &#123;</span><br><span class="line">        answer = max(answer, depth);</span><br><span class="line">    &#125;</span><br><span class="line">    maximum_depth(root-&gt;left, depth + <span class="number">1</span>);</span><br><span class="line">    maximum_depth(root-&gt;right, depth + <span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="“Bottom-up”-Solution"><a href="#“Bottom-up”-Solution" class="headerlink" title="“Bottom-up” Solution"></a>“Bottom-up” Solution</h3><p>Or you can think the problem in this way: </p><p>for a node in a tree, if you know the answer of its children, can you calculate the answer of the node? </p><p>If the answer is yes, solving the problem recursively from bottom up might be a good way.</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maximum_depth</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;                                   <span class="comment">// return 0 for null node</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> left_depth = maximum_depth(root.left);</span><br><span class="line"><span class="keyword">int</span> right_depth = maximum_depth(root.right);</span><br><span class="line"><span class="keyword">return</span> Math.max(left_depth, right_depth) + <span class="number">1</span>;<span class="comment">// return depth of the subtree rooted at root</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;“Top-down”-Solution&quot;&gt;&lt;a href=&quot;#“Top-down”-Solution&quot; class=&quot;headerlink&quot; title=&quot;“Top-down” Solution&quot;&gt;&lt;/a&gt;“Top-down” Solution&lt;/h3&gt;&lt;p&gt;When you meet a tree problem, ask yourself two questions: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Can you determine some parameters to help the node know the answer of itself? &lt;/li&gt;
+&lt;li&gt;Can you use these parameters and the value of the node itself to determine what should be the parameters parsing to its children? &lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="C/C++" scheme="https://fudonglai.github.io/categories/C-C/"/>
+    
+    
+      <category term="Recurive" scheme="https://fudonglai.github.io/tags/Recurive/"/>
+    
+      <category term="LeetCode" scheme="https://fudonglai.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://fudonglai.github.io/2018/10/17/hello-world/"/>
+    <id>https://fudonglai.github.io/2018/10/17/hello-world/</id>
+    <published>2018-10-17T13:58:17.132Z</published>
+    <updated>2018-10-18T11:51:53.663Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><a id="more"></a><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
