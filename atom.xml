@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://fudonglai.github.io/"/>
-  <updated>2018-10-18T11:44:20.234Z</updated>
+  <updated>2018-10-20T10:43:58.557Z</updated>
   <id>https://fudonglai.github.io/</id>
   
   <author>
@@ -17,9 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>No-repeating longest substring</title>
+    <link href="https://fudonglai.github.io/2018/10/20/No-repeating-longest-substring/"/>
+    <id>https://fudonglai.github.io/2018/10/20/No-repeating-longest-substring/</id>
+    <published>2018-10-20T10:24:49.000Z</published>
+    <updated>2018-10-20T10:43:58.557Z</updated>
+    
+    <content type="html"><![CDATA[<p>An ingenuity to use map to solve Substring.</p><a id="more"></a><blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; Input: &quot;pwwkew&quot;</span><br><span class="line">&gt; Output: 3</span><br><span class="line">&gt; Explanation: The answer is &quot;wke&quot;, with the length of 3. </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> * Solution (DP, O(n)):</span><br><span class="line"> * </span><br><span class="line"> * Assume L[i] = s[m...i], denotes the longest substring without repeating</span><br><span class="line"> * characters that ends up at s[i], <span class="keyword">and</span> we keep a hashmap <span class="keyword">for</span> every</span><br><span class="line"> * characters between m ... i, <span class="keyword">while</span> storing &lt;character, index&gt; in the</span><br><span class="line"> * hashmap.</span><br><span class="line"> * We know that each character will appear only once.</span><br><span class="line"> </span><br><span class="line"> * Then to find s[i+<span class="number">1</span>]:</span><br><span class="line"> * <span class="number">1</span>) <span class="keyword">if</span> s[i+<span class="number">1</span>] does <span class="keyword">not</span> appear in hashmap</span><br><span class="line"> *    we can just add s[i+<span class="number">1</span>] to hash <span class="built_in">map</span>. <span class="keyword">and</span> L[i+<span class="number">1</span>] = s[m...i+<span class="number">1</span>]</span><br><span class="line"> * <span class="number">2</span>) <span class="keyword">if</span> s[i+<span class="number">1</span>] exists in hashmap, <span class="keyword">and</span> the hashmap value (the index) is k</span><br><span class="line"> *    let m = max(m, k), then L[i+<span class="number">1</span>] = s[m...i+<span class="number">1</span>], we also need to update</span><br><span class="line"> *    entry in hashmap to mark the latest occurency of s[i+<span class="number">1</span>].</span><br><span class="line"> * </span><br><span class="line"> * Since we scan the <span class="built_in">string</span> <span class="keyword">for</span> only once, <span class="keyword">and</span> the <span class="string">'m'</span> will also move from</span><br><span class="line"> * beginning to end <span class="keyword">for</span> at most once. Overall complexity is O(n).</span><br><span class="line"> *</span><br><span class="line"> * If characters are all in ASCII, we could use <span class="built_in">array</span> to mimic hashmap.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="keyword">int</span> lengthOfLongestSubstring(<span class="built_in">string</span> s) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>, m = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dict(<span class="number">256</span>, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i) &#123;</span><br><span class="line">            m = max(m, dict[s[i]] + <span class="number">1</span>);</span><br><span class="line">            dict[s[i]] = i;</span><br><span class="line">            len = max(len, i - m + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>Now I’ve meet some point of it:</p><ul><li>ASSIC uses one byte to encode, $2^{8}=256$, so we can regard a 256-size vector as a hashtable. The ASSIC of character will be key, its index will be value.</li><li><p>Remeber, every value in <code>dict</code> which not equals $-1$ represents the element’s index clostest to $i$’th element. </p></li><li><p>If all the character is unique, $m$ always equals 0, longest length will increase one by one.</p></li><li>If  encount a character repeates, then we compare $m$ and the index. If $m$ is greater than index, it means the element occured in a substring before, but no big deal for current substring count. If $m$ is less than index, it means the current substring can’t be longer any more, so $m$ will update to the index.</li><li>In other word, every time we update $m$ , we actually find a substring, which is <code>string[m: i]</code>.</li><li>As for varaible <code>len</code>, it compares every loop. Only when current substring <code>i - m + 1</code>longer than before, it will update to a large length.</li></ul><p>I think the partern of solution can have a double pointer expension.</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;An ingenuity to use map to solve Substring.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="LeetCode" scheme="https://fudonglai.github.io/categories/LeetCode/"/>
+    
+    
+      <category term="Algorithm" scheme="https://fudonglai.github.io/tags/Algorithm/"/>
+    
+      <category term="Substring" scheme="https://fudonglai.github.io/tags/Substring/"/>
+    
+  </entry>
+  
+  <entry>
     <title>LeetCode</title>
-    <link href="https://fudonglai.github.io/2018/10/18/LeetCode/"/>
-    <id>https://fudonglai.github.io/2018/10/18/LeetCode/</id>
+    <link href="https://fudonglai.github.io/2018/10/18/Think-Recursively/"/>
+    <id>https://fudonglai.github.io/2018/10/18/Think-Recursively/</id>
     <published>2018-10-18T11:12:34.000Z</published>
     <updated>2018-10-18T11:44:20.234Z</updated>
     

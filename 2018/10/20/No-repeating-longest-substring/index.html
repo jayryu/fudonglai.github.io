@@ -108,17 +108,19 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://fudonglai.github.io/categories/index.html">
+  <meta name="description" content="An ingenuity to use map to solve Substring.">
+<meta name="keywords" content="Algorithm,Substring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No-repeating longest substring">
+<meta property="og:url" content="https://fudonglai.github.io/2018/10/20/No-repeating-longest-substring/index.html">
 <meta property="og:site_name" content="FDL&#39;s BLOG">
+<meta property="og:description" content="An ingenuity to use map to solve Substring.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-18T11:28:40.197Z">
+<meta property="og:updated_time" content="2018-10-20T10:43:58.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
+<meta name="twitter:title" content="No-repeating longest substring">
+<meta name="twitter:description" content="An ingenuity to use map to solve Substring.">
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="FDL's BLOG" type="application/atom+xml" />
@@ -126,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="https://fudonglai.github.io/categories/"/>
+  <link rel="canonical" href="https://fudonglai.github.io/2018/10/20/No-repeating-longest-substring/"/>
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>categories | FDL's BLOG</title>
+  <title>No-repeating longest substring | FDL's BLOG</title>
   
 
 
@@ -248,7 +250,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
   </li>
@@ -268,28 +270,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -317,60 +297,195 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fudonglai.github.io/2018/10/20/No-repeating-longest-substring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fudonglai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FDL's BLOG">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories</h1>
-
-<div class="post-meta">
-  
-  
-
-
-
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                2 categories in total
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C-C/">C/C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LeetCode/">LeetCode</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">No-repeating longest substring
+              
+            
+          </h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-10-20 18:24:49 / Modified: 18:43:58" itemprop="dateCreated datePublished" datetime="2018-10-20T18:24:49+08:00">2018-10-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>An ingenuity to use map to solve Substring.</p>
+<a id="more"></a>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; Input: &quot;pwwkew&quot;</span><br><span class="line">&gt; Output: 3</span><br><span class="line">&gt; Explanation: The answer is &quot;wke&quot;, with the length of 3. </span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> * Solution (DP, O(n)):</span><br><span class="line"> * </span><br><span class="line"> * Assume L[i] = s[m...i], denotes the longest substring without repeating</span><br><span class="line"> * characters that ends up at s[i], <span class="keyword">and</span> we keep a hashmap <span class="keyword">for</span> every</span><br><span class="line"> * characters between m ... i, <span class="keyword">while</span> storing &lt;character, index&gt; in the</span><br><span class="line"> * hashmap.</span><br><span class="line"> * We know that each character will appear only once.</span><br><span class="line"> </span><br><span class="line"> * Then to find s[i+<span class="number">1</span>]:</span><br><span class="line"> * <span class="number">1</span>) <span class="keyword">if</span> s[i+<span class="number">1</span>] does <span class="keyword">not</span> appear in hashmap</span><br><span class="line"> *    we can just add s[i+<span class="number">1</span>] to hash <span class="built_in">map</span>. <span class="keyword">and</span> L[i+<span class="number">1</span>] = s[m...i+<span class="number">1</span>]</span><br><span class="line"> * <span class="number">2</span>) <span class="keyword">if</span> s[i+<span class="number">1</span>] exists in hashmap, <span class="keyword">and</span> the hashmap value (the index) is k</span><br><span class="line"> *    let m = max(m, k), then L[i+<span class="number">1</span>] = s[m...i+<span class="number">1</span>], we also need to update</span><br><span class="line"> *    entry in hashmap to mark the latest occurency of s[i+<span class="number">1</span>].</span><br><span class="line"> * </span><br><span class="line"> * Since we scan the <span class="built_in">string</span> <span class="keyword">for</span> only once, <span class="keyword">and</span> the <span class="string">'m'</span> will also move from</span><br><span class="line"> * beginning to end <span class="keyword">for</span> at most once. Overall complexity is O(n).</span><br><span class="line"> *</span><br><span class="line"> * If characters are all in ASCII, we could use <span class="built_in">array</span> to mimic hashmap.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="keyword">int</span> lengthOfLongestSubstring(<span class="built_in">string</span> s) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>, m = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dict(<span class="number">256</span>, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i) &#123;</span><br><span class="line">            m = max(m, dict[s[i]] + <span class="number">1</span>);</span><br><span class="line">            dict[s[i]] = i;</span><br><span class="line">            len = max(len, i - m + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Now I’ve meet some point of it:</p>
+<ul>
+<li>ASSIC uses one byte to encode, $2^{8}=256$, so we can regard a 256-size vector as a hashtable. The ASSIC of character will be key, its index will be value.</li>
+<li><p>Remeber, every value in <code>dict</code> which not equals $-1$ represents the element’s index clostest to $i$’th element. </p>
+</li>
+<li><p>If all the character is unique, $m$ always equals 0, longest length will increase one by one.</p>
+</li>
+<li>If  encount a character repeates, then we compare $m$ and the index. If $m$ is greater than index, it means the element occured in a substring before, but no big deal for current substring count. If $m$ is less than index, it means the current substring can’t be longer any more, so $m$ will update to the index.</li>
+<li>In other word, every time we update $m$ , we actually find a substring, which is <code>string[m: i]</code>.</li>
+<li>As for varaible <code>len</code>, it compares every loop. Only when current substring <code>i - m + 1</code>longer than before, it will update to a large length.</li>
+</ul>
+<p>I think the partern of solution can have a double pointer expension.</p>
+
       
     </div>
-    
-
-
 
     
+
     
     
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          
+            <a href="/tags/Substring/" rel="tag"># Substring</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/18/Think-Recursively/" rel="next" title="LeetCode">
+                <i class="fa fa-chevron-left"></i> LeetCode
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
   </div>
 
 
@@ -708,6 +823,30 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
   
 
 
