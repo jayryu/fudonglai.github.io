@@ -109,16 +109,16 @@
 
 
   <meta name="description" content="An ingenuity to use map to solve Substring.">
-<meta name="keywords" content="Algorithm,Substring">
+<meta name="keywords" content="Substring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="No-repeating longest substring">
+<meta property="og:title" content="Non-repeating Longest Substring">
 <meta property="og:url" content="https://fudonglai.github.io/2018/10/20/No-repeating-longest-substring/index.html">
 <meta property="og:site_name" content="FDL&#39;s BLOG">
 <meta property="og:description" content="An ingenuity to use map to solve Substring.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-20T10:51:40.161Z">
+<meta property="og:updated_time" content="2018-10-26T05:53:01.425Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="No-repeating longest substring">
+<meta name="twitter:title" content="Non-repeating Longest Substring">
 <meta name="twitter:description" content="An ingenuity to use map to solve Substring.">
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>No-repeating longest substring | FDL's BLOG</title>
+  <title>Non-repeating Longest Substring | FDL's BLOG</title>
   
 
 
@@ -328,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">No-repeating longest substring
+          <h1 class="post-title" itemprop="name headline">Non-repeating Longest Substring
               
             
           </h1>
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="Created: 2018-10-20 18:24:49 / Modified: 18:51:40" itemprop="dateCreated datePublished" datetime="2018-10-20T18:24:49+08:00">2018-10-20</time>
+              <time title="Created: 2018-10-20 18:24:49" itemprop="dateCreated datePublished" datetime="2018-10-20T18:24:49+08:00">2018-10-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-10-26 13:53:01" itemprop="dateModified" datetime="2018-10-26T13:53:01+08:00">2018-10-26</time>
               
             
           </span>
@@ -375,7 +387,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
 
                 
                 
@@ -411,12 +423,11 @@
       
         <p>An ingenuity to use map to solve Substring.</p>
 <a id="more"></a>
-<p><strong>Example</strong>:</p>
-<blockquote>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h3><blockquote>
 <p>Input: “pwwkew”<br>Output: 3<br>Explanation: The answer is “wke”, with the length of 3. </p>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> * Solution (DP, O(n)):</span><br><span class="line"> * </span><br><span class="line"> * Assume L[i] = s[m...i], denotes the longest substring without repeating</span><br><span class="line"> * characters that ends up at s[i], <span class="keyword">and</span> we keep a hashmap <span class="keyword">for</span> every</span><br><span class="line"> * characters between m ... i, <span class="keyword">while</span> storing &lt;character, index&gt; in the</span><br><span class="line"> * hashmap.</span><br><span class="line"> * We know that each character will appear only once.</span><br><span class="line"> </span><br><span class="line"> * Then to find s[i+<span class="number">1</span>]:</span><br><span class="line"> * <span class="number">1</span>) <span class="keyword">if</span> s[i+<span class="number">1</span>] does <span class="keyword">not</span> appear in hashmap</span><br><span class="line"> *    we can just add s[i+<span class="number">1</span>] to hash <span class="built_in">map</span>. <span class="keyword">and</span> L[i+<span class="number">1</span>] = s[m...i+<span class="number">1</span>]</span><br><span class="line"> * <span class="number">2</span>) <span class="keyword">if</span> s[i+<span class="number">1</span>] exists in hashmap, <span class="keyword">and</span> the hashmap value (the index) is k</span><br><span class="line"> *    let m = max(m, k), then L[i+<span class="number">1</span>] = s[m...i+<span class="number">1</span>], we also need to update</span><br><span class="line"> *    entry in hashmap to mark the latest occurency of s[i+<span class="number">1</span>].</span><br><span class="line"> * </span><br><span class="line"> * Since we scan the <span class="built_in">string</span> <span class="keyword">for</span> only once, <span class="keyword">and</span> the <span class="string">'m'</span> will also move from</span><br><span class="line"> * beginning to end <span class="keyword">for</span> at most once. Overall complexity is O(n).</span><br><span class="line"> *</span><br><span class="line"> * If characters are all in ASCII, we could use <span class="built_in">array</span> to mimic hashmap.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="keyword">int</span> lengthOfLongestSubstring(<span class="built_in">string</span> s) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>, m = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dict(<span class="number">256</span>, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i) &#123;</span><br><span class="line">            m = max(m, dict[s[i]] + <span class="number">1</span>);</span><br><span class="line">            dict[s[i]] = i;</span><br><span class="line">            len = max(len, i - m + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Now I’ve meet some point of it:</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="### Solution"></a>### Solution</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> * Solution (DP, O(n)):</span><br><span class="line"> * </span><br><span class="line"> * Assume L[i] = s[m...i], denotes the longest substring without repeating</span><br><span class="line"> * characters that ends up at s[i], <span class="keyword">and</span> we keep a hashmap <span class="keyword">for</span> every</span><br><span class="line"> * characters between m ... i, <span class="keyword">while</span> storing &lt;character, index&gt; in the</span><br><span class="line"> * hashmap.</span><br><span class="line"> * We know that each character will appear only once.</span><br><span class="line"> </span><br><span class="line"> * Then to find s[i+<span class="number">1</span>]:</span><br><span class="line"> * <span class="number">1</span>) <span class="keyword">if</span> s[i+<span class="number">1</span>] does <span class="keyword">not</span> appear in hashmap</span><br><span class="line"> *    we can just add s[i+<span class="number">1</span>] to hash <span class="built_in">map</span>. <span class="keyword">and</span> L[i+<span class="number">1</span>] = s[m...i+<span class="number">1</span>]</span><br><span class="line"> * <span class="number">2</span>) <span class="keyword">if</span> s[i+<span class="number">1</span>] exists in hashmap, <span class="keyword">and</span> the hashmap value (the index) is k</span><br><span class="line"> *    let m = max(m, k), then L[i+<span class="number">1</span>] = s[m...i+<span class="number">1</span>], we also need to update</span><br><span class="line"> *    entry in hashmap to mark the latest occurency of s[i+<span class="number">1</span>].</span><br><span class="line"> * </span><br><span class="line"> * Since we scan the <span class="built_in">string</span> <span class="keyword">for</span> only once, <span class="keyword">and</span> the <span class="string">'m'</span> will also move from</span><br><span class="line"> * beginning to end <span class="keyword">for</span> at most once. Overall complexity is O(n).</span><br><span class="line"> *</span><br><span class="line"> * If characters are all in ASCII, we could use <span class="built_in">array</span> to mimic hashmap.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">   <span class="keyword">int</span> lengthOfLongestSubstring(<span class="built_in">string</span> s) &#123;</span><br><span class="line">        <span class="keyword">int</span> len = <span class="number">0</span>, m = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dict(<span class="number">256</span>, <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.size(); ++i) &#123;</span><br><span class="line">            m = max(m, dict[s[i]] + <span class="number">1</span>);</span><br><span class="line">            dict[s[i]] = i;</span><br><span class="line">            len = max(len, i - m + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="Complement"><a href="#Complement" class="headerlink" title="Complement"></a>Complement</h3><p>Now I’ve meet some point of it:</p>
 <ul>
 <li>ASSIC uses one byte to encode, $2^{8}=256$, so we can regard a 256-size vector as a hashtable. The ASSIC of character will be key, its index will be value.</li>
 <li><p>Remeber, every value in <code>dict</code> which not equals $-1$ represents the element’s index clostest to $i$’th element. </p>
@@ -448,8 +459,6 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
-          
             <a href="/tags/Substring/" rel="tag"># Substring</a>
           
         </div>
@@ -472,6 +481,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/26/Fundamental-DP-Problem/" rel="prev" title="Fundamental DP Problem">
+                Fundamental DP Problem <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -516,8 +529,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -536,7 +558,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -553,7 +575,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -574,7 +598,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -649,6 +675,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">1.</span> <span class="nav-text">Example:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">2.</span> <span class="nav-text">### Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Complement"><span class="nav-number">3.</span> <span class="nav-text">Complement</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
