@@ -1,21 +1,24 @@
 ---
-title: No-repeating longest substring
+title: Non-Repeating Longest Substring
 date: 2018-10-20 18:24:49
 mathjax: true
 tags:	
-	- Algorithm
 	- Substring
-categories: LeetCode
+categories: 
+	- Algorithm
 ---
 
 An ingenuity to use map to solve Substring.
 
 <!--more-->
 
-**Example**:
+### Example:
+
 > Input: "pwwkew"
 > Output: 3
 > Explanation: The answer is "wke", with the length of 3. 
+
+###Solution
 
 
 ```cpp
@@ -54,6 +57,8 @@ public:
     }
 };
 ```
+
+### Complement
 
 Now I've meet some point of it:
 
