@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="scanfscanf 遇到的字符不是当前内容时， 会把它放回原处，在扫描下一个输入项或下一次调用 scanf 时再试图读入。 123int i, j;float x, y;scanf(&quot;%d%d%f%f&quot;, &amp;amp;i, &amp;amp;j, &amp;amp;x, &amp;amp;y); Suppose that the user enters three lines of input:  1-20.3-4.0e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现代C语言--I">
+<meta property="og:url" content="https://fudonglai.github.io/2018/11/19/现代C语言-I/index.html">
+<meta property="og:site_name" content="FDL&#39;s BLOG">
+<meta property="og:description" content="scanfscanf 遇到的字符不是当前内容时， 会把它放回原处，在扫描下一个输入项或下一次调用 scanf 时再试图读入。 123int i, j;float x, y;scanf(&quot;%d%d%f%f&quot;, &amp;amp;i, &amp;amp;j, &amp;amp;x, &amp;amp;y); Suppose that the user enters three lines of input:  1-20.3-4.0e">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-11-20T06:52:54.289Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="现代C语言--I">
+<meta name="twitter:description" content="scanfscanf 遇到的字符不是当前内容时， 会把它放回原处，在扫描下一个输入项或下一次调用 scanf 时再试图读入。 123int i, j;float x, y;scanf(&quot;%d%d%f%f&quot;, &amp;amp;i, &amp;amp;j, &amp;amp;x, &amp;amp;y); Suppose that the user enters three lines of input:  1-20.3-4.0e">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="FDL's BLOG" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://fudonglai.github.io/2018/11/19/现代C语言-I/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>现代C语言--I | FDL's BLOG</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">FDL's BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Down to earth. <br>Being towards death.</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />About</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://fudonglai.github.io/2018/11/19/现代C语言-I/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Fudonglai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FDL's BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">现代C语言--I
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-11-19 01:09:53" itemprop="dateCreated datePublished" datetime="2018-11-19T01:09:53+08:00">2018-11-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-11-20 14:52:54" itemprop="dateModified" datetime="2018-11-20T14:52:54+08:00">2018-11-20</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-Programming-Language/" itemprop="url" rel="index"><span itemprop="name">C Programming Language</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h2><p>scanf 遇到的字符不是当前内容时， 会把它放回原处，在扫描下一个输入项或下一次调用 scanf 时再试图读入。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i, j;</span><br><span class="line"><span class="keyword">float</span> x, y;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d%d%f%f"</span>, &amp;i, &amp;j, &amp;x, &amp;y);</span><br></pre></td></tr></table></figure>
+<p>Suppose that the user enters three lines of input:</p>
+<blockquote>
+<p>1-20.3-4.0e3</p>
+</blockquote>
+<ul>
+<li>第一个转换符是 %d，第一个非空字符是 1，可以出现在整数中，下一个字符是 ”-“，scanf 认为它不应该出现在整数内部，所以把 “-” 放回原处，把 1 读入 i 。</li>
+<li>第二个读入 -20 之后发现小数点，scanf 认为它不该出现在整数中，所以把 -20 读入 j 。</li>
+<li>第三个读入 .3，发现负号不该出现在浮点数中间，所以把 0.3 读入 x 。</li>
+<li>最后把 -4*10^3 读入 y，并把最后的换行符放回原处。</li>
+</ul>
+<p>在读取格式串时遇到任何空白字符，scanf 会跳过空白符直到遇到非空白符尝试读取。</p>
+<p>如 <code>&quot;%d/%d&quot;</code> 格式串，输入<code>5/    96</code>，能够成功读取两个整数。</p>
+<p>如输入<code>5  /    96</code>，则在读取 5 后无法匹配 <code>/</code>而把之后的所有留给下次 scanf 调用。</p>
+<h2 id="的副作用（side-effect）"><a href="#的副作用（side-effect）" class="headerlink" title="+= 的副作用（side effect）"></a>+= 的副作用（side effect）</h2><p>如果 v 有副作用，那么 v += e 不等价于 v = v + e 。</p>
+<p>因为 v += e 只会导致一次 v 的求值，而 v = v + e 有两次。</p>
+<p>如 <code>a[i++] += 1</code> 只会导致 i 自增 1；</p>
+<p>而 <code>a[i++] = a[i++] + 1</code> 导致 i 自增 2 。</p>
+<h2 id="getchar"><a href="#getchar" class="headerlink" title="getchar"></a>getchar</h2><p>getchar(), putchar() faster than scanf and printf.</p>
+<p><strong>idiom</strong>:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (getchar() != <span class="string">'\n'</span>) <span class="comment">/*skips rest of line*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> ((ch = getchar()) == <span class="string">' '</span>) <span class="comment">/*skips blanks*/</span></span><br></pre></td></tr></table></figure>
+<p>如果混用 scanf 和 getchar，注意 scanf 读取剩下的字符（包括换行符）会被 getchar 读取。</p>
+<h2 id="使用-lf-读取-double-型的值，用-f-进行显示"><a href="#使用-lf-读取-double-型的值，用-f-进行显示" class="headerlink" title="使用 %lf 读取 double 型的值，用 %f 进行显示"></a>使用 %lf 读取 double 型的值，用 %f 进行显示</h2><p>因为 printf 和 scanf 都没有限制参数个数，使用了可变长度参数列表。</p>
+<p>当调用可变长度参数列表函数时编译器安排 float 自动转化成 double 型，所以 printf 无法区分 float 和 double，所以可以用 %f 表示 float 和 double。</p>
+<p>但是 scanf 用指针指向变量，必须知道地址上存储的类型，否则如果 float 和 double 位模式不同，scanf 会存储错误的字节数量。</p>
+<h2 id="typedef-优于宏定义"><a href="#typedef-优于宏定义" class="headerlink" title="typedef 优于宏定义"></a>typedef 优于宏定义</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PTR_TO_INT int *</span></span><br><span class="line">PTR_TO_INT p, q;</span><br><span class="line"><span class="comment">// int *p, q;</span></span><br><span class="line"><span class="comment">// typedef will be better</span></span><br></pre></td></tr></table></figure>
+<h2 id="远离-1"><a href="#远离-1" class="headerlink" title="远离 1"></a>远离 1</h2><p>下标从 0 开始，注意数组的下标越界陷阱。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>], i;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++)&#123;</span><br><span class="line">    a[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里可能会导致无限循环。因为 <code>a[10]</code>已经越界，如果变量 <code>i</code>如果储存在这块空间，则错误地把<code>i</code>赋值为 0，无限循环。</p>
+<h2 id="数组初始化"><a href="#数组初始化" class="headerlink" title="数组初始化"></a>数组初始化</h2><p>如果给定长度和初始化列表，列表长度为0 或超过长度都是非法的，如果小于长度，剩余位置自动初始化为 0 。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">10</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;</span><br><span class="line"><span class="comment">/*initial value: 1,2,0,0,0,0,0,0,0,0*/</span></span><br></pre></td></tr></table></figure>
+<p><strong>多维数组初始化：</strong></p>
+<ul>
+<li>如果一行给出的列表不能填满该行，该行剩余填满 0 。</li>
+<li>如果给出的列表行数不足数组行数，剩余行数全部填满 0 。</li>
+<li>如果去掉大括号也可以，一旦填满一行，编译器自动去填下一行。（危险）</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m[<span class="number">4</span>][<span class="number">4</span>] = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,</span><br><span class="line">               &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;&#125;;</span><br><span class="line"><span class="comment">/* 1,2,0,0,</span></span><br><span class="line"><span class="comment">   1,2,3,4,</span></span><br><span class="line"><span class="comment">   0,0,0,0,</span></span><br><span class="line"><span class="comment">   0,0,0,0 */</span></span><br></pre></td></tr></table></figure>
+<p>所以要全部初始化为 0 应该是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m[<span class="number">4</span>][<span class="number">4</span>] = &#123;&#123;<span class="number">0</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="数组和指针区别"><a href="#数组和指针区别" class="headerlink" title="数组和指针区别"></a>数组和指针区别</h2><ol>
+<li><p>数组名不能被赋予新值。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">while</span> (*a != <span class="number">0</span>)</span><br><span class="line">    a++;		<span class="comment">/*WRONG*/</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>sizeof()</code>对数组名和指针效果不同。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> len_of_a = <span class="keyword">sizeof</span>(a) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>); <span class="comment">/* len_of_a == 3 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p = a;</span><br><span class="line"><span class="keyword">int</span> len_of_p = <span class="keyword">sizeof</span>(p); <span class="comment">/* len_of_p == sizeof(int*) */</span></span><br></pre></td></tr></table></figure>
+<p>sizeof 对普通指针计算一个指针在内存中的字节长度，这取决于机器。</p>
+<p>sizeof 对数组名计算该数组在内存中的总字节长度，所以可以那样求得数组元素个数。</p>
+</li>
+</ol>
+<h2 id="函数形式参数中-int-a-还是-int-a"><a href="#函数形式参数中-int-a-还是-int-a" class="headerlink" title="函数形式参数中 int *a 还是 int a[ ] ?"></a>函数形式参数中 int *a 还是 int a[ ] ?</h2><p>考虑到函数参数传入的是拷贝，<code>int *a</code> 和 <code>int a[]</code> 完全相同，即便后者形式好像是数组，实际上也是普通指针，没有任何数组名的特殊技能。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a[])</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="keyword">sizeof</span>(a) / <span class="keyword">sizeof</span>(a[<span class="number">0</span>]);  <span class="comment">/*WRONG*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数组型参数"><a href="#数组型参数" class="headerlink" title="数组型参数"></a>数组型参数</h2><p>传入一维数组时，不需要写长度，写了也没用。</p>
+<p>传入多为数组时，只有第一维长度是不必要的。因为要让编译器知道一个元素长度到底是多少。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun1</span><span class="params">(<span class="keyword">int</span> a[<span class="number">10</span>])</span></span>&#123;  <span class="comment">//OK</span></span><br><span class="line">    <span class="comment">/* equal to fun(int a[]) and fun(int* a) */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun2</span><span class="params">(<span class="keyword">int</span> a[][<span class="number">10</span>])</span></span>&#123; <span class="comment">//correct</span></span><br><span class="line">    <span class="comment">/* because complier konws there are sizeof(int) * 10 </span></span><br><span class="line"><span class="comment">    bits between a[0] and a[1] */</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/* fun2(int a[][]) is WRONG */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="i-a"><a href="#i-a" class="headerlink" title="i [a] ???"></a>i [a] ???</h2><p>对编译器而言：<code>i[a] == *(i + a) == a[i]</code></p>
+<h2 id="字符串字面量"><a href="#字符串字面量" class="headerlink" title="字符串字面量"></a>字符串字面量</h2><p>最后一个是空字符<code>/0</code>，其 ASCII 码为 0 ，而数字 <code>0</code> 的 ASCII 码为 48 。</p>
+<h2 id="字符数组和数组指针"><a href="#字符数组和数组指针" class="headerlink" title="字符数组和数组指针"></a>字符数组和数组指针</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> date_arr[] = <span class="string">"Nov 20"</span>;</span><br><span class="line"><span class="keyword">char</span>* date_ptr = <span class="string">"Nov 20"</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>date_ptr</code>是指针变量，可以再指向其他值，<code>date_arr</code>不能。</li>
+<li><code>date_ptr</code>指向的字符串是字面值，不可修改，<code>date_arr</code>可以随意修改。</li>
+</ul>
+<p>初始化字符数组时类似普通数组，若填不满空位添 0 ，超过限制就非法，但是不会检查最后是否有停止标识符<code>/0</code>。</p>
+<p>考虑 <code>printf</code>和<code>scanf</code>第一个参数都是接受字符串常量，即该串的首地址。</p>
+<h2 id="读写字符串"><a href="#读写字符串" class="headerlink" title="读写字符串"></a>读写字符串</h2><h3 id="printf-amp-amp-puts"><a href="#printf-amp-amp-puts" class="headerlink" title="printf &amp;&amp; puts"></a>printf &amp;&amp; puts</h3><p>printf 逐个读取字符，直到读到空字符，如果空字符丢失，继续读，知道在内存找到一个空字符为止。</p>
+<p>puts 接受一个参数没有格式串，写完字符串后自动添加换行符。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[] = <span class="string">"abcdef"</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%.3s"</span>, str); <span class="comment">// abc</span></span><br><span class="line"><span class="built_in">puts</span>(str); <span class="comment">// abcdef</span></span><br></pre></td></tr></table></figure>
+<h3 id="scanf-amp-amp-gets"><a href="#scanf-amp-amp-gets" class="headerlink" title="scanf &amp;&amp; gets"></a>scanf &amp;&amp; gets</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LEN 11</span></span><br><span class="line"><span class="keyword">char</span> str[LEN];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>, str);</span><br><span class="line"><span class="comment">/* input: "   hello world"*/</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   str: 'h','e','l','l','o','\0', ...</span></span><br><span class="line"><span class="comment">   scanf never get string with space, skip blank and end at blank,</span></span><br><span class="line"><span class="comment">   and add '\0' automatically.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">gets(str); <span class="comment">//all will be recieved, but dangerous</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/19/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Fudonglai" />
+            
+              <p class="site-author-name" itemprop="name">Fudonglai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/fudonglai" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:labuladong@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/fudonglai" target="_blank" title="Google"><i class="fa fa-fw fa-google"></i>Google</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://stackoverflow.com" target="_blank" title="StackOverflow"><i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                MY FRIEND
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://chanchan.me/" title="易佬" target="_blank">易佬</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wangyang-wy.github.io/" title="阳神" target="_blank">阳神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.duwenli.cn/" title="杜文丽" target="_blank">杜文丽</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jzago.top/" title="张雷" target="_blank">张雷</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.3cat.top/" title="何长鸿" target="_blank">何长鸿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://marvinle.cn/" title="轨迹" target="_blank">轨迹</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#scanf"><span class="nav-number">1.</span> <span class="nav-text">scanf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#的副作用（side-effect）"><span class="nav-number">2.</span> <span class="nav-text">+= 的副作用（side effect）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getchar"><span class="nav-number">3.</span> <span class="nav-text">getchar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-lf-读取-double-型的值，用-f-进行显示"><span class="nav-number">4.</span> <span class="nav-text">使用 %lf 读取 double 型的值，用 %f 进行显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#typedef-优于宏定义"><span class="nav-number">5.</span> <span class="nav-text">typedef 优于宏定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远离-1"><span class="nav-number">6.</span> <span class="nav-text">远离 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组初始化"><span class="nav-number">7.</span> <span class="nav-text">数组初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组和指针区别"><span class="nav-number">8.</span> <span class="nav-text">数组和指针区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数形式参数中-int-a-还是-int-a"><span class="nav-number">9.</span> <span class="nav-text">函数形式参数中 int *a 还是 int a[ ] ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组型参数"><span class="nav-number">10.</span> <span class="nav-text">数组型参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#i-a"><span class="nav-number">11.</span> <span class="nav-text">i [a] ???</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串字面量"><span class="nav-number">12.</span> <span class="nav-text">字符串字面量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符数组和数组指针"><span class="nav-number">13.</span> <span class="nav-text">字符数组和数组指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写字符串"><span class="nav-number">14.</span> <span class="nav-text">读写字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#printf-amp-amp-puts"><span class="nav-number">14.1.</span> <span class="nav-text">printf &amp;&amp; puts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scanf-amp-amp-gets"><span class="nav-number">14.2.</span> <span class="nav-text">scanf &amp;&amp; gets</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fudonglai</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Muse</a> v6.4.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.4.2"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.4.2"></script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
