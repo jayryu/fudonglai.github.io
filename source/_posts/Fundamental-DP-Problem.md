@@ -10,7 +10,7 @@ categories:
 
 There is an interesting problem in LeetCode: [Unique Paths](https://leetcode.com/problems/unique-paths/).
 
-I found some pespicuous explaination in the comments.
+I found some perspicuous explanation in the comments. Thank @[YFGu0618](https://leetcode.com/yfgu0618) for his graph.
 
 <!--more-->
 
@@ -31,11 +31,11 @@ Since the robot can only move right and down, when it arrives at a point, there 
 
 Thus we have the following equations: $Approach(i, j)=Approach(i - 1, j) + Approach(i, j-1)$
 
-![picture](http://ph6w748rg.bkt.clouddn.com/18-10-26/15711693.jpg)
+![picture](https://assets.leetcode.com/users/yfgu0618/image_1540157891.png)
 
 The boundary conditions of the above equation have some problems at the leftmost column and the uppermost row due to $(0, j)$ and $(i, 0)$ do not exist. To oversmart the problem automatically,  it's easier that we initialize the array to something like following:
 
-![picture](http://ph6w748rg.bkt.clouddn.com/18-10-26/36462436.jpg)
+![picture](https://assets.leetcode.com/users/yfgu0618/image_1540158218.png)
 
 ### Implement
 
