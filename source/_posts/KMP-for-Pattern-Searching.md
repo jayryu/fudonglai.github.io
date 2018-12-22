@@ -2,6 +2,7 @@
 
 title: KMP for Pattern Searching
 date: 2018-10-26 16:18:39
+mathjax: true
 tags:
 	- patern search
 categories:
