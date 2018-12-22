@@ -108,21 +108,21 @@
 
 
 
-  <meta name="description" content="There is an interesting problem in LeetCode: Unique Paths. I found some pespicuous explaination in the comments.">
+  <meta name="description" content="There is an interesting problem in LeetCode: Unique Paths. I found some perspicuous explanation in the comments. Thank @YFGu0618 for his graph.">
 <meta name="keywords" content="dynamic programming">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Fundamental DP Problem">
 <meta property="og:url" content="https://fudonglai.github.io/2018/10/26/Fundamental-DP-Problem/index.html">
 <meta property="og:site_name" content="FDL&#39;s BLOG">
-<meta property="og:description" content="There is an interesting problem in LeetCode: Unique Paths. I found some pespicuous explaination in the comments.">
+<meta property="og:description" content="There is an interesting problem in LeetCode: Unique Paths. I found some perspicuous explanation in the comments. Thank @YFGu0618 for his graph.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://ph6w748rg.bkt.clouddn.com/18-10-26/15711693.jpg">
-<meta property="og:image" content="http://ph6w748rg.bkt.clouddn.com/18-10-26/36462436.jpg">
-<meta property="og:updated_time" content="2018-10-26T06:14:42.158Z">
+<meta property="og:image" content="https://assets.leetcode.com/users/yfgu0618/image_1540157891.png">
+<meta property="og:image" content="https://assets.leetcode.com/users/yfgu0618/image_1540158218.png">
+<meta property="og:updated_time" content="2018-12-22T15:37:09.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fundamental DP Problem">
-<meta name="twitter:description" content="There is an interesting problem in LeetCode: Unique Paths. I found some pespicuous explaination in the comments.">
-<meta name="twitter:image" content="http://ph6w748rg.bkt.clouddn.com/18-10-26/15711693.jpg">
+<meta name="twitter:description" content="There is an interesting problem in LeetCode: Unique Paths. I found some perspicuous explanation in the comments. Thank @YFGu0618 for his graph.">
+<meta name="twitter:image" content="https://assets.leetcode.com/users/yfgu0618/image_1540157891.png">
 
 
 
@@ -356,12 +356,24 @@
                 
               
 
-              <time title="Created: 2018-10-26 10:52:13 / Modified: 14:14:42" itemprop="dateCreated datePublished" datetime="2018-10-26T10:52:13+08:00">2018-10-26</time>
+              <time title="Created: 2018-10-26 10:52:13" itemprop="dateCreated datePublished" datetime="2018-10-26T10:52:13+08:00">2018-10-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-22 23:37:09" itemprop="dateModified" datetime="2018-12-22T23:37:09+08:00">2018-12-22</time>
               
             
           </span>
@@ -413,7 +425,7 @@
 
       
         <p>There is an interesting problem in LeetCode: <a href="https://leetcode.com/problems/unique-paths/" target="_blank" rel="noopener">Unique Paths</a>.</p>
-<p>I found some pespicuous explaination in the comments.</p>
+<p>I found some perspicuous explanation in the comments. Thank @<a href="https://leetcode.com/yfgu0618" target="_blank" rel="noopener">YFGu0618</a> for his graph.</p>
 <a id="more"></a>
 <h3 id="Description"><a href="#Description" class="headerlink" title="Description:"></a>Description:</h3><blockquote>
 <p>A robot is located at the top-left corner of a <em>m</em> x <em>n</em> grid.</p>
@@ -426,9 +438,9 @@
 <li>It arrives at that point from left (moving right to that point).</li>
 </ol>
 <p>Thus we have the following equations: $Approach(i, j)=Approach(i - 1, j) + Approach(i, j-1)$</p>
-<p><img src="http://ph6w748rg.bkt.clouddn.com/18-10-26/15711693.jpg" alt="picture"></p>
+<p><img src="https://assets.leetcode.com/users/yfgu0618/image_1540157891.png" alt="picture"></p>
 <p>The boundary conditions of the above equation have some problems at the leftmost column and the uppermost row due to $(0, j)$ and $(i, 0)$ do not exist. To oversmart the problem automatically,  it’s easier that we initialize the array to something like following:</p>
-<p><img src="http://ph6w748rg.bkt.clouddn.com/18-10-26/36462436.jpg" alt="picture"></p>
+<p><img src="https://assets.leetcode.com/users/yfgu0618/image_1540158218.png" alt="picture"></p>
 <h3 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h3><p>So, here is my codes:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">map</span>(m + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="built_in">map</span>[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m + <span class="number">1</span>; ++i) </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) </span><br><span class="line">                <span class="built_in">map</span>[i][j] = <span class="built_in">map</span>[i][j - <span class="number">1</span>] + <span class="built_in">map</span>[i - <span class="number">1</span>][j];</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">map</span>[m][n];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>As can be seen, the above solution runs in $O(n^2)$ time and costs $O(m*n)$ space.</p>
