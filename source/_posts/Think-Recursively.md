@@ -2,7 +2,7 @@
 title: Think Recursively
 date: 2018-10-18 19:12:34
 tags:
-	- Recurive
+	- Recursion
 categories:
 	- Algorithm
 ---
