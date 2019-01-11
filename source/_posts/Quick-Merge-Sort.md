@@ -4,7 +4,6 @@ date: 2019-01-10 19:03:18
 tags:
 	- Sort
 	- 算法导论
-	- C/C++
 categories:
 	- Algorithm
 ---
@@ -98,4 +97,86 @@ void merge(vector<int> &nums, int begin, int pivot, int end) {
 ```
 
 
+
+# Quick Sort
+
+之所以把快速排序和归并排序放在一起，因为他俩很像，尤其是算法框架上，但是区别也很明显：
+
+1. 归并排序是典型的分治思想，遵循 分解 -> 处理 -> 合并 的模式，**观察归并代码，递归调用是在分解问题，`merge`函数兼顾处理和合并操作。**快排不是分治的模式，而是遵行 **预处理 -> 分解 -> 回溯** 的模式，关键在于预处理阶段，`partition`函数能够将一个元素放到正确的位置，并将数组分成两半。
+2. 观察函数执行的过程，归并排序是从左到右或从右到左形成有序，而快速排序是单点突破，每次递归都会将某个元素排好，放到它的最终位置，而这个元素的选择是随机的，并没有什么规律。
+
+快排的**关键点在于`partition`函数，返回划分点的索引，并使该点左侧的值都小于该点，右侧都大于该点**。
+
+划分完成后，再对这两半数组递归调用`quick_sort`函数即可。所以这个框架看起来像这个：
+
+```cpp
+void quick_sort(数组) {
+    if (没办法再分了) return;
+    划分点 = partition(数组);
+    quick_sort(划分点左边的数组);
+    quick_sort(划分点右边的数组);
+}
+```
+
+以上就是个前序遍历二叉树嘛，至于为什么，你应该能猜出来了。`partition`函数就不好形容了，直接看代码好了。
+
+```cpp
+int partition(vector<int> &nums, int begin, int pivot, int end) {
+    swap(nums[end - 1], nums[pivot]);
+    int i = begin - 1;
+    for (int j = begin; j < end - 1; j++) { //!!!!!!!!!!
+        if (nums[j] < nums[end - 1])
+            swap(nums[++i], nums[j]);
+    }
+    swap(nums[end - 1], nums[i + 1]);
+    return i + 1;
+}
+
+void quick_sort(vector<int>& nums, int begin, int end) {
+    if (end - begin <= 1) return;
+    int partitioned = partition(nums, begin, end - 1, end);
+    quick_sort(nums, begin, partitioned);
+    quick_sort(nums, partitioned + 1, end); //!!!!!!!!!!!
+}
+```
+
+打感叹号的地方尤其需要注意，`j=begin`, `partitioned + 1`, 这两个地方我没注意，调了半天 bug 。
+
+记住递归调用的时候是传入划分点左右的数组，**不包括划分点本身！**否则算法就会无限递归下去。
+
+最后放一个 C++ 写的快排泛型算法，参照 Github 上的项目编写（泛型写起来麻烦点，但是用起来真香）：
+
+```cpp
+namespace SortAlgorithm {
+    template<typename Iterator, typename CompareType=std::less<typename std::iterator_traits<Iterator>::value_type>>
+    Iterator partition(const Iterator begin, const Iterator end, const Iterator pivot_iter,
+                       CompareType compare = CompareType()) {
+        auto size = std::distance(begin, end);
+        assert(size >= 0);
+        if (size == 0) return end;
+        assert(std::distance(begin, pivot_iter) >= 0 && std::distance(pivot_iter, end) > 0);
+        auto smaller_next = begin;
+        auto current = begin;
+        while (current != end - 1) {
+            if (compare(*current, *(end - 1))) {
+                std::swap(*current, *smaller_next);
+                smaller_next++;
+            }
+            current++;
+        }
+        std::swap(*smaller_next, *(end - 1));
+        return smaller_next;
+    }
+
+    template<typename Iterator, typename CompareType=std::less<typename std::iterator_traits<Iterator>::value_type>>
+    void quick_sort(const Iterator begin, const Iterator end, CompareType compare = CompareType()) {
+        auto size = std::distance(begin, end);
+        if (size <= 1) return;
+        auto partitioned_iter = partition(begin, end, end - 1, compare); //end-1 as pivot
+        quick_sort(begin, partitioned_iter, compare);
+        quick_sort(partitioned_iter + 1, end, compare);
+    }
+}
+
+```
 
