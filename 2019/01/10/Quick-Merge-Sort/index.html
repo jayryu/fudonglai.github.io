@@ -109,14 +109,14 @@
 
 
   <meta name="description" content="最经又刷了不少算法题，啃了啃《算法导论》，觉得很多算法光写而不拿出来总结，还是不能体会出精髓，于是将自己吸收的东西总结一下，力求能让其他人都看懂。同时练习一下 C++ 泛型编程，写成泛型算法。">
-<meta name="keywords" content="Sort,算法导论,C&#x2F;C++">
+<meta name="keywords" content="Sort,算法导论">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序I - 归并 &amp; 快排">
 <meta property="og:url" content="https://fudonglai.github.io/2019/01/10/Quick-Merge-Sort/index.html">
 <meta property="og:site_name" content="FDL&#39;s BLOG">
 <meta property="og:description" content="最经又刷了不少算法题，啃了啃《算法导论》，觉得很多算法光写而不拿出来总结，还是不能体会出精髓，于是将自己吸收的东西总结一下，力求能让其他人都看懂。同时练习一下 C++ 泛型编程，写成泛型算法。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-10T12:29:57.474Z">
+<meta property="og:updated_time" content="2019-01-11T03:01:17.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序I - 归并 &amp; 快排">
 <meta name="twitter:description" content="最经又刷了不少算法题，啃了啃《算法导论》，觉得很多算法光写而不拿出来总结，还是不能体会出精髓，于是将自己吸收的东西总结一下，力求能让其他人都看懂。同时练习一下 C++ 泛型编程，写成泛型算法。">
@@ -353,12 +353,24 @@
                 
               
 
-              <time title="Created: 2019-01-10 19:03:18 / Modified: 20:29:57" itemprop="dateCreated datePublished" datetime="2019-01-10T19:03:18+08:00">2019-01-10</time>
+              <time title="Created: 2019-01-10 19:03:18" itemprop="dateCreated datePublished" datetime="2019-01-10T19:03:18+08:00">2019-01-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-11 11:01:17" itemprop="dateModified" datetime="2019-01-11T11:01:17+08:00">2019-01-11</time>
               
             
           </span>
@@ -435,6 +447,20 @@
 <li><code>pivot = begin + (end - begin) / 2</code>实际上就是取中值，防止溢出罢了。</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (begin &gt;= end - <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> pivot = begin + (end - begin) / <span class="number">2</span>;</span><br><span class="line">    merge_sort(nums, begin, pivot);</span><br><span class="line">    merge_sort(nums, pivot, end);</span><br><span class="line">    merge(nums, begin, pivot, end);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> begin, <span class="keyword">int</span> pivot, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; left(nums.begin() + begin, nums.begin() + pivot);</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; right(nums.begin() + pivot, nums.begin() + end);</span><br><span class="line">    left.push_back(INT_MAX);</span><br><span class="line">    right.push_back(INT_MAX);</span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">0</span>, q = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = begin; i &lt; end; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (left[p] &lt; right[q]) &#123;</span><br><span class="line">            nums[i] = left[p++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            nums[i] = right[q++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Quick-Sort"><a href="#Quick-Sort" class="headerlink" title="Quick Sort"></a>Quick Sort</h1><p>之所以把快速排序和归并排序放在一起，因为他俩很像，尤其是算法框架上，但是区别也很明显：</p>
+<ol>
+<li>归并排序是典型的分治思想，遵循 分解 -&gt; 处理 -&gt; 合并 的模式，<strong>观察归并代码，递归调用是在分解问题，<code>merge</code>函数兼顾处理和合并操作。</strong>快排不是分治的模式，而是遵行 <strong>预处理 -&gt; 分解 -&gt; 回溯</strong> 的模式，关键在于预处理阶段，<code>partition</code>函数能够将一个元素放到正确的位置，并将数组分成两半。</li>
+<li>观察函数执行的过程，归并排序是从左到右或从右到左形成有序，而快速排序是单点突破，每次递归都会将某个元素排好，放到它的最终位置，而这个元素的选择是随机的，并没有什么规律。</li>
+</ol>
+<p>快排的<strong>关键点在于<code>partition</code>函数，返回划分点的索引，并使该点左侧的值都小于该点，右侧都大于该点</strong>。</p>
+<p>划分完成后，再对这两半数组递归调用<code>quick_sort</code>函数即可。所以这个框架看起来像这个：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(数组)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (没办法再分了) <span class="keyword">return</span>;</span><br><span class="line">    划分点 = partition(数组);</span><br><span class="line">    quick_sort(划分点左边的数组);</span><br><span class="line">    quick_sort(划分点右边的数组);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上就是个前序遍历二叉树嘛，至于为什么，你应该能猜出来了。<code>partition</code>函数就不好形容了，直接看代码好了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> begin, <span class="keyword">int</span> pivot, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    swap(nums[end - <span class="number">1</span>], nums[pivot]);</span><br><span class="line">    <span class="keyword">int</span> i = begin - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = begin; j &lt; end - <span class="number">1</span>; j++) &#123; <span class="comment">//!!!!!!!!!!</span></span><br><span class="line">        <span class="keyword">if</span> (nums[j] &lt; nums[end - <span class="number">1</span>])</span><br><span class="line">            swap(nums[++i], nums[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    swap(nums[end - <span class="number">1</span>], nums[i + <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> begin, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (end - begin &lt;= <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> partitioned = partition(nums, begin, end - <span class="number">1</span>, end);</span><br><span class="line">    quick_sort(nums, begin, partitioned);</span><br><span class="line">    quick_sort(nums, partitioned + <span class="number">1</span>, end); <span class="comment">//!!!!!!!!!!!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>打感叹号的地方尤其需要注意，<code>j=begin</code>, <code>partitioned + 1</code>, 这两个地方我没注意，调了半天 bug 。</p>
+<p>记住递归调用的时候是传入划分点左右的数组，<strong>不包括划分点本身！</strong>否则算法就会无限递归下去。</p>
+<p>最后放一个 C++ 写的快排泛型算法，参照 Github 上的项目编写（泛型写起来麻烦点，但是用起来真香）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> SortAlgorithm &#123;</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> CompareType=<span class="built_in">std</span>::less&lt;<span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;Iterator&gt;::value_type&gt;&gt;</span><br><span class="line">    Iterator partition(<span class="keyword">const</span> Iterator begin, <span class="keyword">const</span> Iterator end, <span class="keyword">const</span> Iterator pivot_iter,</span><br><span class="line">                       CompareType compare = CompareType()) &#123;</span><br><span class="line">        <span class="keyword">auto</span> size = <span class="built_in">std</span>::distance(begin, end);</span><br><span class="line">        assert(size &gt;= <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (size == <span class="number">0</span>) <span class="keyword">return</span> end;</span><br><span class="line">        assert(<span class="built_in">std</span>::distance(begin, pivot_iter) &gt;= <span class="number">0</span> &amp;&amp; <span class="built_in">std</span>::distance(pivot_iter, end) &gt; <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">auto</span> smaller_next = begin;</span><br><span class="line">        <span class="keyword">auto</span> current = begin;</span><br><span class="line">        <span class="keyword">while</span> (current != end - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (compare(*current, *(end - <span class="number">1</span>))) &#123;</span><br><span class="line">                <span class="built_in">std</span>::swap(*current, *smaller_next);</span><br><span class="line">                smaller_next++;</span><br><span class="line">            &#125;</span><br><span class="line">            current++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">std</span>::swap(*smaller_next, *(end - <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">return</span> smaller_next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Iterator, <span class="keyword">typename</span> CompareType=<span class="built_in">std</span>::less&lt;<span class="keyword">typename</span> <span class="built_in">std</span>::iterator_traits&lt;Iterator&gt;::value_type&gt;&gt;</span><br><span class="line">    <span class="keyword">void</span> quick_sort(<span class="keyword">const</span> Iterator begin, <span class="keyword">const</span> Iterator end, CompareType compare = CompareType()) &#123;</span><br><span class="line">        <span class="keyword">auto</span> size = <span class="built_in">std</span>::distance(begin, end);</span><br><span class="line">        <span class="keyword">if</span> (size &lt;= <span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">auto</span> partitioned_iter = partition(begin, end, end - <span class="number">1</span>, compare); <span class="comment">//end-1 as pivot</span></span><br><span class="line">        quick_sort(begin, partitioned_iter, compare);</span><br><span class="line">        quick_sort(partitioned_iter + <span class="number">1</span>, end, compare);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -458,8 +484,6 @@
             <a href="/tags/Sort/" rel="tag"># Sort</a>
           
             <a href="/tags/算法导论/" rel="tag"># 算法导论</a>
-          
-            <a href="/tags/C-C/" rel="tag"># C/C++</a>
           
         </div>
       
@@ -604,9 +628,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -711,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Merge-Sort"><span class="nav-number">1.</span> <span class="nav-text">Merge Sort</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Merge-Sort"><span class="nav-number">1.</span> <span class="nav-text">Merge Sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Quick-Sort"><span class="nav-number">2.</span> <span class="nav-text">Quick Sort</span></a></li></ol></div>
             
 
           </div>
