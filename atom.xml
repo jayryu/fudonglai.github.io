@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://fudonglai.github.io/"/>
-  <updated>2019-01-11T03:13:06.950Z</updated>
+  <updated>2019-01-12T09:11:04.132Z</updated>
   <id>https://fudonglai.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>最小二乘法和正则化</title>
+    <link href="https://fudonglai.github.io/2019/01/12/Statistics-1/"/>
+    <id>https://fudonglai.github.io/2019/01/12/Statistics-1/</id>
+    <published>2019-01-11T17:51:14.000Z</published>
+    <updated>2019-01-12T09:11:04.132Z</updated>
+    
+    <content type="html"><![CDATA[<p>经过半年的数学，英语，算法学习，阿东又要重回机器学习算法的摸爬滚打中了，现在从统计学习方法开始边学边总结。之前学习过一遍，但是由于当时的知识有限，学起来略有困难，现在不仅有了更强的能力，而且开源社区对这方面的资源也日益完善，首先感谢各位大佬对我学习的帮助，尤其感谢<a href="https://github.com/fengdu78/lihang-code" target="_blank" rel="noopener">黄海广博士</a>将本书翻译成代码，对我们来说确实是一条学习捷径。</p><p>系列文章文按照本人学习李航<a href="">《统计学习方法》</a>的顺序，结合吴恩达老师的机器学习课程，记录一些重点和个人的思考，希望能帮助到大家。</p><a id="more"></a><h1 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h1><p>高斯于1823年在误差 $e_1, … ,e_n$ 独立同分布的假定下,证明了最小二乘方法的一个最优性质: 在所有无偏的线性估计类中,最小二乘方法是其中方差最小的！</p><p>最小二乘法就是设计出一个假设函数 $f(x)$，利用原始训练数据集 $T=(x_i, y_i), i \in [1, m]$，拟合出一组参数 $\omega(\omega_0, \omega_1…\omega_m)$，计算残差 $r_i=f(x_i)-y_i$ 使得损失函数 $Loss(\omega, f) = \sum_{i=1}^mr_i^2$ 最小。其实这个很好想明白吧？我写以上一堆数学符号只是为了重新熟悉一下 Mathjax 的语法，向 Markdown 工程师的方向更进一步，哈哈。</p><p>我们常用的假设函数是多项式函数<br>$$H(x)=w_0+w_1x+w_2x^2+…w_nx^n$$</p><p>为啥来？因为多项式函数的次数足够大的时候，是可以无限逼近很多曲线的，不过次数并不是越多越好的，看具体实现。</p><p>机器学习本质就是拟合，以便对未知作出预测，我们的目的就是最小化损失函数 $Loss(x)$，即<br>$$\min_\omega \sum_{i=1}^m(H(x_i)-y_i)^2$$</p><p>这里用 Python 代码模仿一个简单的最小二乘法示例，先生成了一个含有噪声的 $sin(2\pi x)$图像，然后用不同次数的多项式拟合，代码如下。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.sin(x * np.pi * <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fit_func</span><span class="params">(p, x)</span>:</span></span><br><span class="line">    <span class="comment"># 这里 p 需要是一个序列，作为每个多项式的系数</span></span><br><span class="line">    <span class="comment"># 相当于之前的权值向量 w</span></span><br><span class="line">    f = np.polyld(p)</span><br><span class="line">    <span class="keyword">return</span> f(x)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">residuals</span><span class="params">(p, x, y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> fit_func(x, p) - y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fitting</span><span class="params">(M=<span class="number">0</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    M 为多项式的次数</span></span><br><span class="line"><span class="string">    """</span>    </span><br><span class="line">    <span class="comment"># 随机初始化多项式参数</span></span><br><span class="line">    p_init = np.random.rand(M+<span class="number">1</span>)</span><br><span class="line">    <span class="comment"># 最小二乘法</span></span><br><span class="line">    p_lsq = leastsq(residuals_func, p_init, args=(x, y))</span><br><span class="line">    print(<span class="string">'Fitting Parameters:'</span>, p_lsq[<span class="number">0</span>])</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 可视化</span></span><br><span class="line">    plt.plot(x_points, real_func(x_points), label=<span class="string">'real'</span>)</span><br><span class="line">    plt.plot(x_points, fit_func(p_lsq[<span class="number">0</span>], x_points), label=<span class="string">'fitted curve'</span>)</span><br><span class="line">    plt.plot(x, y, <span class="string">'bo'</span>, label=<span class="string">'noise'</span>)</span><br><span class="line">    plt.legend()</span><br><span class="line">    <span class="keyword">return</span> p_lsq</span><br></pre></td></tr></table></figure><p>p_lsq_1 = fitting(M=1)]</p><p><img src="https://github.com/fudonglai/merge_reponsitories/blob/master/Screenshot%20from%202018-12-10%2011-49-09.png?raw=true" alt="picture"></p><p>p_lsq_3 = fitting(M=3)</p><p><img src="https://github.com/fudonglai/merge_reponsitories/blob/master/download.png?raw=true" alt="picture"></p><p>p_lsq_9 = fitting(M=9)</p><p><img src="https://github.com/fudonglai/merge_reponsitories/blob/master/download%20%281%29.png?raw=true" alt="picture"></p><p>显然最后一个过拟合，第一个拟合不足，第二个还差不多。</p><h1 id="正则化"><a href="#正则化" class="headerlink" title="正则化"></a>正则化</h1><p>为了解决过拟合，添加正则化项，模型越复杂，正则化项越大，越能抑制过拟合。<br>正则化项的一般形式为<br>$$\min_{f\in F} \frac{1}{N} \sum_{i=1}^n L(y_i, f(x_i)) + \lambda J(f) $$</p><p>其中 $L(y_i, f(x_i))$ 表示损失函数，说白了就是误差，就是说着一块要越小越好，越小越准确啊。一般我们损失函数都是平方函数，正则化项可以考虑 $L_1$ 或 $L_2$ 范数，一般用 $L_2$ 范数比较多吧。</p><p>那么我们解决的问题就是最小化损失函数</p><p>$$ L(w) = \frac{1}{N} (f(x_i;w)-y_i)^2 + \frac{\lambda}{2}||w||^2 $$</p><p>$||w||$ 是 $L_2$ 范数，$||w||= \sqrt{w~w^T}$，至于为什么，我推荐<a href="https://www.cnblogs.com/weizc/p/5778678.html" target="_blank" rel="noopener">一篇博客</a>。</p><p>以下是算法代码，从这里我发现了一点之前没有注意过的问题：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">residuals_func_regularization</span><span class="params">(p, x, y)</span>:</span></span><br><span class="line">    ret = fit_func(p, x) - y</span><br><span class="line">    ret = np.append(ret, np.sqrt(<span class="number">0.5</span>*regularization*np.square(p))) <span class="comment"># L2范数作为正则化项</span></span><br><span class="line">    <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure></p><p>我发现一个问题：np.append() 函数是直接在向量之后增加，相当于增加了原始向量的长度，而我记得以前学习正则化的时候，是直接把罚项加到损失函数里面，这样最小化损失函数的时候也可以同时最小化罚项，也就是简化了模型参数。而且上面那个公式不是写了要对 $L_2$ 范数平方吗，那对罚项再开根号有什么意义，都是求最小值，为何要徒增计算量？</p><p>我觉得这个函数这样写都可以:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_residuals_func_regularization</span><span class="params">(p, x, y)</span>:</span></span><br><span class="line">    ret = fit_func(p, x) - y</span><br><span class="line">    ret = np.append(ret, np.sqrt(<span class="number">0.5</span>*regularization*np.square(p)))</span><br><span class="line">    <span class="comment"># ret = np.append(ret, 0.5*regularization*np.square(p))</span></span><br><span class="line">    <span class="comment"># ret = ret + 0.5*regularization*np.square(p)</span></span><br><span class="line">    <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure></p><p>我试了下，果然都可以，应为思想都没变，都是要同时最小化损失函数和权值向量，只是 append 的话就是把正则项同时作为损失参考指标而已，相当于吧损失函数和正则项分开，同时优化。</p><p>我对这里正则化的理解是，多项式系数越高，模型越复杂，就是说参数越多，可以把每个次数的单项是理解成一个特征，然而有的特征并不是重点，却占有较大权值，应该舍弃，但是如果没有正则化项的话，这些特征就是过拟合的元凶。而有了正则化，迫使参数和模型的复杂度同时降低，就使这种特征的权值很低，接近于 0，相当于减少了冗余特征，增加了模型的泛化能力。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;经过半年的数学，英语，算法学习，阿东又要重回机器学习算法的摸爬滚打中了，现在从统计学习方法开始边学边总结。之前学习过一遍，但是由于当时的知识有限，学起来略有困难，现在不仅有了更强的能力，而且开源社区对这方面的资源也日益完善，首先感谢各位大佬对我学习的帮助，尤其感谢&lt;a href=&quot;https://github.com/fengdu78/lihang-code&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;黄海广博士&lt;/a&gt;将本书翻译成代码，对我们来说确实是一条学习捷径。&lt;/p&gt;
+&lt;p&gt;系列文章文按照本人学习李航&lt;a href=&quot;&quot;&gt;《统计学习方法》&lt;/a&gt;的顺序，结合吴恩达老师的机器学习课程，记录一些重点和个人的思考，希望能帮助到大家。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="统计学习方法" scheme="https://fudonglai.github.io/categories/%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+    
+      <category term="Statistics" scheme="https://fudonglai.github.io/tags/Statistics/"/>
+    
+      <category term="Mathematics" scheme="https://fudonglai.github.io/tags/Mathematics/"/>
+    
+  </entry>
   
   <entry>
     <title>排序I - 归并 &amp; 快排</title>
@@ -59,11 +84,11 @@
       <category term="Algorithm" scheme="https://fudonglai.github.io/categories/Algorithm/"/>
     
     
-      <category term="Recursion" scheme="https://fudonglai.github.io/tags/Recursion/"/>
-    
       <category term="Array" scheme="https://fudonglai.github.io/tags/Array/"/>
     
       <category term="LinkedList" scheme="https://fudonglai.github.io/tags/LinkedList/"/>
+    
+      <category term="Recursion" scheme="https://fudonglai.github.io/tags/Recursion/"/>
     
   </entry>
   
