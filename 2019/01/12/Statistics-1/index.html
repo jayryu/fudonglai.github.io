@@ -108,21 +108,21 @@
 
 
 
-  <meta name="description" content="经过半年的数学，英语，算法学习，阿东又要重回机器学习算法的摸爬滚打中了，现在从统计学习方法开始边学边总结。之前学习过一遍，但是由于当时的知识有限，学起来略有困难，现在不仅有了更强的能力，而且开源社区对这方面的资源也日益完善，首先感谢各位大佬对我学习的帮助，尤其感谢黄海广博士将本书翻译成代码，对我们来说确实是一条学习捷径。 系列文章文按照本人学习李航《统计学习方法》的顺序，结合吴恩达老师的机器学习课">
+  <meta name="description" content="经过半年的数学，英语，算法学习，阿东又要重回机器学习算法的摸爬滚打中了，现在从统计学习方法开始边学边总结。之前学习过一遍，但是由于当时的知识有限，学起来略有困难，现在不仅有了更强的能力，而且开源社区对这方面的资源也日益完善，首先感谢各位大佬对我学习的帮助，尤其感谢黄海广博士将本书翻译成代码，对我们来说确实是一条学习捷径。">
 <meta name="keywords" content="Statistics,Mathematics">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最小二乘法和正则化">
 <meta property="og:url" content="https://fudonglai.github.io/2019/01/12/Statistics-1/index.html">
 <meta property="og:site_name" content="阿东的算法笔记">
-<meta property="og:description" content="经过半年的数学，英语，算法学习，阿东又要重回机器学习算法的摸爬滚打中了，现在从统计学习方法开始边学边总结。之前学习过一遍，但是由于当时的知识有限，学起来略有困难，现在不仅有了更强的能力，而且开源社区对这方面的资源也日益完善，首先感谢各位大佬对我学习的帮助，尤其感谢黄海广博士将本书翻译成代码，对我们来说确实是一条学习捷径。 系列文章文按照本人学习李航《统计学习方法》的顺序，结合吴恩达老师的机器学习课">
+<meta property="og:description" content="经过半年的数学，英语，算法学习，阿东又要重回机器学习算法的摸爬滚打中了，现在从统计学习方法开始边学边总结。之前学习过一遍，但是由于当时的知识有限，学起来略有困难，现在不仅有了更强的能力，而且开源社区对这方面的资源也日益完善，首先感谢各位大佬对我学习的帮助，尤其感谢黄海广博士将本书翻译成代码，对我们来说确实是一条学习捷径。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://github.com/fudonglai/merge_reponsitories/blob/master/Screenshot%20from%202018-12-10%2011-49-09.png?raw=true">
 <meta property="og:image" content="https://github.com/fudonglai/merge_reponsitories/blob/master/download.png?raw=true">
 <meta property="og:image" content="https://github.com/fudonglai/merge_reponsitories/blob/master/download%20%281%29.png?raw=true">
-<meta property="og:updated_time" content="2019-01-12T09:17:22.941Z">
+<meta property="og:updated_time" content="2019-01-16T04:19:13.068Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最小二乘法和正则化">
-<meta name="twitter:description" content="经过半年的数学，英语，算法学习，阿东又要重回机器学习算法的摸爬滚打中了，现在从统计学习方法开始边学边总结。之前学习过一遍，但是由于当时的知识有限，学起来略有困难，现在不仅有了更强的能力，而且开源社区对这方面的资源也日益完善，首先感谢各位大佬对我学习的帮助，尤其感谢黄海广博士将本书翻译成代码，对我们来说确实是一条学习捷径。 系列文章文按照本人学习李航《统计学习方法》的顺序，结合吴恩达老师的机器学习课">
+<meta name="twitter:description" content="经过半年的数学，英语，算法学习，阿东又要重回机器学习算法的摸爬滚打中了，现在从统计学习方法开始边学边总结。之前学习过一遍，但是由于当时的知识有限，学起来略有困难，现在不仅有了更强的能力，而且开源社区对这方面的资源也日益完善，首先感谢各位大佬对我学习的帮助，尤其感谢黄海广博士将本书翻译成代码，对我们来说确实是一条学习捷径。">
 <meta name="twitter:image" content="https://github.com/fudonglai/merge_reponsitories/blob/master/Screenshot%20from%202018-12-10%2011-49-09.png?raw=true">
 
 
@@ -357,12 +357,24 @@
                 
               
 
-              <time title="Created: 2019-01-12 01:51:14 / Modified: 17:17:22" itemprop="dateCreated datePublished" datetime="2019-01-12T01:51:14+08:00">2019-01-12</time>
+              <time title="Created: 2019-01-12 01:51:14" itemprop="dateCreated datePublished" datetime="2019-01-12T01:51:14+08:00">2019-01-12</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-16 12:19:13" itemprop="dateModified" datetime="2019-01-16T12:19:13+08:00">2019-01-16</time>
               
             
           </span>
@@ -379,7 +391,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/统计学习方法/" itemprop="url" rel="index"><span itemprop="name">统计学习方法</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
 
                 
                 
@@ -414,8 +426,8 @@
 
       
         <p>经过半年的数学，英语，算法学习，阿东又要重回机器学习算法的摸爬滚打中了，现在从统计学习方法开始边学边总结。之前学习过一遍，但是由于当时的知识有限，学起来略有困难，现在不仅有了更强的能力，而且开源社区对这方面的资源也日益完善，首先感谢各位大佬对我学习的帮助，尤其感谢<a href="https://github.com/fengdu78/lihang-code" target="_blank" rel="noopener">黄海广博士</a>将本书翻译成代码，对我们来说确实是一条学习捷径。</p>
-<p>系列文章文按照本人学习李航<a href="">《统计学习方法》</a>的顺序，结合吴恩达老师的机器学习课程，记录一些重点和个人的思考，希望能帮助到大家。</p>
 <a id="more"></a>
+<p>系列文章文按照本人学习李航<a href="">《统计学习方法》</a>的顺序，结合吴恩达老师的机器学习课程，记录一些重点和个人的思考，希望能帮助到大家。</p>
 <h1 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h1><p>高斯于1823年在误差 $e_1, … ,e_n$ 独立同分布的假定下,证明了最小二乘方法的一个最优性质: 在所有无偏的线性估计类中,最小二乘方法是其中方差最小的！</p>
 <p>最小二乘法就是设计出一个假设函数 $f(x)$，利用原始训练数据集 $T=(x_i, y_i), i \in [1, m]$，拟合出一组参数 $\omega(\omega_0, \omega_1…\omega_m)$，计算残差 $r_i=f(x_i)-y_i$ 使得损失函数 $Loss(\omega, f) = \sum_{i=1}^mr_i^2$ 最小。其实这个很好想明白吧？我写以上一堆数学符号只是为了重新熟悉一下 Mathjax 的语法，向 Markdown 工程师的方向更进一步，哈哈。</p>
 <p>我们常用的假设函数是多项式函数<br>$$H(x)=w_0+w_1x+w_2x^2+…w_nx^n$$</p>
@@ -484,6 +496,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/16/Perceptron/" rel="prev" title="感知机">
+                感知机 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -557,7 +573,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

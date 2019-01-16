@@ -108,21 +108,20 @@
 
 
 
-  <meta name="description" content="There is an interesting problem in LeetCode: Unique Paths. I found some perspicuous explanation in the comments. Thank @YFGu0618 for his graph.">
-<meta name="keywords" content="dynamic programming">
+  <meta name="description" content="纸上得来终觉浅，绝知此事要躬行，只有亲自实现一个简单的感知机，遇到各种突发奇想的疑问然后尝试解决，才能真正掌握原理。">
+<meta name="keywords" content="Statistics,Mathematics">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fundamental DP Problem">
-<meta property="og:url" content="https://fudonglai.github.io/2018/10/26/Fundamental-DP-Problem/index.html">
+<meta property="og:title" content="感知机">
+<meta property="og:url" content="https://fudonglai.github.io/2019/01/16/Perceptron/index.html">
 <meta property="og:site_name" content="阿东的算法笔记">
-<meta property="og:description" content="There is an interesting problem in LeetCode: Unique Paths. I found some perspicuous explanation in the comments. Thank @YFGu0618 for his graph.">
+<meta property="og:description" content="纸上得来终觉浅，绝知此事要躬行，只有亲自实现一个简单的感知机，遇到各种突发奇想的疑问然后尝试解决，才能真正掌握原理。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://assets.leetcode.com/users/yfgu0618/image_1540157891.png">
-<meta property="og:image" content="https://assets.leetcode.com/users/yfgu0618/image_1540158218.png">
-<meta property="og:updated_time" content="2018-12-30T03:39:37.781Z">
+<meta property="og:image" content="https://github.com/fudonglai/merge_reponsitories/blob/master/perceptron.png?raw=true">
+<meta property="og:updated_time" content="2019-01-16T04:19:14.676Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fundamental DP Problem">
-<meta name="twitter:description" content="There is an interesting problem in LeetCode: Unique Paths. I found some perspicuous explanation in the comments. Thank @YFGu0618 for his graph.">
-<meta name="twitter:image" content="https://assets.leetcode.com/users/yfgu0618/image_1540157891.png">
+<meta name="twitter:title" content="感知机">
+<meta name="twitter:description" content="纸上得来终觉浅，绝知此事要躬行，只有亲自实现一个简单的感知机，遇到各种突发奇想的疑问然后尝试解决，才能真正掌握原理。">
+<meta name="twitter:image" content="https://github.com/fudonglai/merge_reponsitories/blob/master/perceptron.png?raw=true">
 
 
 
@@ -131,7 +130,7 @@
 
 
 
-  <link rel="canonical" href="https://fudonglai.github.io/2018/10/26/Fundamental-DP-Problem/"/>
+  <link rel="canonical" href="https://fudonglai.github.io/2019/01/16/Perceptron/"/>
 
 
 
@@ -141,7 +140,7 @@
   };
 </script>
 
-  <title>Fundamental DP Problem | 阿东的算法笔记</title>
+  <title>感知机 | 阿东的算法笔记</title>
   
 
 
@@ -314,7 +313,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://fudonglai.github.io/2018/10/26/Fundamental-DP-Problem/">
+    <link itemprop="mainEntityOfPage" href="https://fudonglai.github.io/2019/01/16/Perceptron/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="付东来">
@@ -331,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Fundamental DP Problem
+          <h1 class="post-title" itemprop="name headline">感知机
               
             
           </h1>
@@ -356,24 +355,12 @@
                 
               
 
-              <time title="Created: 2018-10-26 10:52:13" itemprop="dateCreated datePublished" datetime="2018-10-26T10:52:13+08:00">2018-10-26</time>
+              <time title="Created: 2019-01-16 10:46:07 / Modified: 12:19:14" itemprop="dateCreated datePublished" datetime="2019-01-16T10:46:07+08:00">2019-01-16</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-30 11:39:37" itemprop="dateModified" datetime="2018-12-30T11:39:37+08:00">2018-12-30</time>
               
             
           </span>
@@ -390,7 +377,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
 
                 
                 
@@ -424,34 +411,22 @@
       
 
       
-        <p>There is an interesting problem in LeetCode: <a href="https://leetcode.com/problems/unique-paths/" target="_blank" rel="noopener">Unique Paths</a>.</p>
-<p>I found some perspicuous explanation in the comments. Thank @<a href="https://leetcode.com/yfgu0618" target="_blank" rel="noopener">YFGu0618</a> for his graph.</p>
-<a id="more"></a>
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description:"></a>Description:</h3><blockquote>
-<p>A robot is located at the top-left corner of a <em>m</em> x <em>n</em> grid.</p>
-<p>The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid.</p>
-<p>How many possible unique paths are there?</p>
-</blockquote>
-<h3 id="Observations"><a href="#Observations" class="headerlink" title="Observations:"></a>Observations:</h3><p>Since the robot can only move right and down, when it arrives at a point, there are only two possibilities:</p>
-<ol>
-<li>It arrives at that point from above (moving down to that point);</li>
-<li>It arrives at that point from left (moving right to that point).</li>
-</ol>
-<p>Thus we have the following equations: $Approach(i, j)=Approach(i - 1, j) + Approach(i, j-1)$</p>
-<p><img src="https://assets.leetcode.com/users/yfgu0618/image_1540157891.png" alt="picture"></p>
-<p>The boundary conditions of the above equation have some problems at the leftmost column and the uppermost row due to $(0, j)$ and $(i, 0)$ do not exist. To oversmart the problem automatically,  it’s easier that we initialize the array to something like following:</p>
-<p><img src="https://assets.leetcode.com/users/yfgu0618/image_1540158218.png" alt="picture"></p>
-<h3 id="Implement"><a href="#Implement" class="headerlink" title="Implement"></a>Implement</h3><p>So, here is my codes:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="built_in">map</span>(m + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">        <span class="built_in">map</span>[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m + <span class="number">1</span>; ++i) </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n + <span class="number">1</span>; ++j) </span><br><span class="line">                <span class="built_in">map</span>[i][j] = <span class="built_in">map</span>[i][j - <span class="number">1</span>] + <span class="built_in">map</span>[i - <span class="number">1</span>][j];</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">map</span>[m][n];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>As can be seen, the above solution runs in $O(n^2)$ time and costs $O(m*n)$ space.</p>
-<p>But we find that each time we update the <code>map[i][j]</code>, we only need to consider the current column(for <code>map[i-1, j]</code>) and the previous column(for <code>map[i, j-1]</code>), so only two vector can be enough.</p>
-<p>Here is new codes:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; c1(m + <span class="number">1</span>, <span class="number">0</span>), c2(c1);</span><br><span class="line">        c1[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++j)</span><br><span class="line">                c2[j] = c1[j] + c2[j - <span class="number">1</span>];</span><br><span class="line">            c1 = c2;</span><br><span class="line">            c2 = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(m + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> c1[m];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>Further inspecting the above code, we find it needs $O(m)$ space, but if $n&lt;m$, should I convert to $O(n)$ space? And we find that <code>vector c2</code>will convert to zero in every loop, so the operation is actually <code>c1[i] += c1[i-1]</code>. Now we can implement a more efficient approach:</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (m &gt; n)</span><br><span class="line">           <span class="keyword">return</span> uniquePaths(n, m);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; c(m, <span class="number">0</span>);</span><br><span class="line">        c[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m - <span class="number">1</span>; ++j) </span><br><span class="line">                c[j] += c[j - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> c[m - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>Now it is prefect, how interesting it is!</p>
-<p>PS: 2018/12/30</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">uniquePaths</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &gt; m) <span class="keyword">return</span> uniquePaths(n, m);</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(n, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">                dp[j] = dp[j] + dp[j - <span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp.back();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+        <p>纸上得来终觉浅，绝知此事要躬行，只有亲自实现一个简单的感知机，遇到各种突发奇想的疑问然后尝试解决，才能真正掌握原理。<br><a id="more"></a></p>
+<h1 id="数学基础"><a href="#数学基础" class="headerlink" title="数学基础"></a>数学基础</h1><p>输入空间为 $\chi \in R^n$，输出空间 $\Upsilon \in {+1,-1}$，输入空间到输出空间映射的函数为<br>$$f(x) = sign(w \cdot x + b)$$</p>
+<p>其中符号函数<br>$$ sign(x) =<br>\begin{cases}<br>+1, &amp; x&gt;=0 \<br>-1, &amp; x&lt;0 \<br>\end{cases} $$</p>
+<p>只要数据集线性可分，就可以把所有实例点正确划分到超平面两侧，即对于 $y = +1$ 的点，$w \cdot x &gt; 0$，对于 $y = -1$ 的点，$w \cdot x &lt; 0$</p>
+<h1 id="学习策略"><a href="#学习策略" class="headerlink" title="学习策略"></a>学习策略</h1><p>学习的目的就是最优化问题，就是最小化误分点个数，但是误分点个数显然是离散的，无法求导，所以感知机模型采取所有 <strong>误分点</strong> 到超平面的距离：<br>$$\frac{1}{||w||} |w \cdot x_i + b|$$</p>
+<p>注意这个公式是初中就学过的点到直线的距离公式，把点坐标代入直线方程求绝对值然后放到分子，再把直线方程系数做平方和开根号放到分母。这个公式就是那个公式的通用版，适用于高维超平面而已。</p>
+<p>那么如何才能找到误分点呢，仔细看下本段落标题上面那句话，知道了正确划分，自然就知道了错误划分的表现。同时注意符号，求解优化问题，我们都要改成求最小值问题。设集合 $M$ 是误分点集合，所有误分点到超平面总距离为</p>
+<p>$$-\sum_{x_i \in M}\frac{1}{||w||} y_i (w \cdot x_i + b)$$</p>
+<p>由此我们可以定义损失函数<br>$$L(w, b) = -\sum_{x_i \in M} y_i (w \cdot x_i + b)$$</p>
+<p>求解最小化问题<br>$$\min_{w,b} L(w, b) = -\sum_{x_i \in M} y_i (w \cdot x_i + b)$$</p>
+<p>按照梯度的方向下降就能减少误分点了<br>$$\nabla_w L(w, b) = -\sum_{x \in M} y_ix_i$$<br>$$\nabla_b L(w, b) = -\sum_{x \in M} y_i$$</p>
+<p>每次对参数进行更新<br>$$w \leftarrow w + \eta y_i x_i$$<br>$$b \leftarrow b + \eta y_i$$</p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n, l=<span class="number">0.001</span>)</span>:</span></span><br><span class="line">    <span class="string">""" n 为数据维度，l 为梯度步长 """</span></span><br><span class="line">        self.w = np.ones(n, dtype=np.float32)</span><br><span class="line">        self.b = <span class="number">0</span></span><br><span class="line">        self.l = l</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sign</span><span class="params">(self, X, y)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> (self.w @ X + self.b) * y</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X_train, y_train)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            wrong_count = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(X_train)):</span><br><span class="line">                X = X_train[i]</span><br><span class="line">                y = y_train[i]</span><br><span class="line">                <span class="keyword">if</span> self.sign(X, y) &lt;= <span class="number">0</span>:</span><br><span class="line">                    self.w += self.l * np.dot(X, y)</span><br><span class="line">                    self.b += self.l * y</span><br><span class="line">                    wrong_count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> wrong_count == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> (self.w, self.b)</span><br></pre></td></tr></table></figure>
+<p>用 <code>sklearn</code> 包中 <code>iris</code> 数据集作为测试数据集，一系列处理后画图<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">perceptron = Model(<span class="number">2</span>, <span class="number">0.01</span>)</span><br><span class="line">perceptron.fit(X, y)</span><br><span class="line">x_points = np.linspace(<span class="number">4</span>, <span class="number">7</span>, <span class="number">10</span>)</span><br><span class="line">y_points = <span class="number">-1</span>*(perceptron.w[<span class="number">0</span>] * x_points + perceptron.b)/perceptron.w[<span class="number">1</span>]</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/fudonglai/merge_reponsitories/blob/master/perceptron.png?raw=true" alt="perceptron"></p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>在处理数据，将输出空间的数据改成 -1 和 +1 的时候，我在纠结到底应该是在超平面以上是 +1 还是以下是 +1，事实证明都可以，因为参数会自动调整，只要跟着梯度的方向走就行了。</p>
 
       
     </div>
@@ -472,7 +447,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/dynamic-programming/" rel="tag"># dynamic programming</a>
+            <a href="/tags/Statistics/" rel="tag"># Statistics</a>
+          
+            <a href="/tags/Mathematics/" rel="tag"># Mathematics</a>
           
         </div>
       
@@ -485,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/20/Non-Repeating-longest-substring/" rel="next" title="Non-Repeating Longest Substring">
-                <i class="fa fa-chevron-left"></i> Non-Repeating Longest Substring
+              <a href="/2019/01/12/Statistics-1/" rel="next" title="最小二乘法和正则化">
+                <i class="fa fa-chevron-left"></i> 最小二乘法和正则化
               </a>
             
           </div>
@@ -494,10 +471,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/26/KMP-for-Pattern-Searching/" rel="prev" title="KMP for Pattern Searching">
-                KMP for Pattern Searching <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -728,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Observations"><span class="nav-number">2.</span> <span class="nav-text">Observations:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Implement"><span class="nav-number">3.</span> <span class="nav-text">Implement</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数学基础"><span class="nav-number">1.</span> <span class="nav-text">数学基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习策略"><span class="nav-number">2.</span> <span class="nav-text">学习策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">4.</span> <span class="nav-text">思考</span></a></li></ol></div>
             
 
           </div>
