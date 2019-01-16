@@ -5,7 +5,7 @@ tags:
     - Statistics
     - Mathematics
 categories:
-    - 统计学习方法
+    - Machine Learning
 mathjax: true
 ---
 

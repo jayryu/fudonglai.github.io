@@ -5,7 +5,7 @@ tags:
 - Statistics
 - Mathematics
 categories:
-- 统计学习方法
+- Machine Learning
 mathjax: true
 ---
 
@@ -19,8 +19,8 @@ $$f(x) = sign(w \cdot x + b)$$
 其中符号函数
 $$ sign(x) = 
 \begin{cases}
-+1, x>=0\\
--1, x<0\\
++1, & x>=0 \\
+-1, & x<0 \\
 \end{cases} $$
 
 只要数据集线性可分，就可以把所有实例点正确划分到超平面两侧，即对于 $y = +1$ 的点，$w \cdot x > 0$，对于 $y = -1$ 的点，$w \cdot x < 0$
