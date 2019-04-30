@@ -86,3 +86,9 @@ y_points = -1*(perceptron.w[0] * x_points + perceptron.b)/perceptron.w[1]
 
 # 思考
 在处理数据，将输出空间的数据改成 -1 和 +1 的时候，我在纠结到底应该是在超平面以上是 +1 还是以下是 +1，事实证明都可以，因为参数会自动调整，只要跟着梯度的方向走就行了。
+
+
+
+欢迎关注我的公众号，致力于把事情讲清楚：labuladong
+
+![公众号二维码](https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)

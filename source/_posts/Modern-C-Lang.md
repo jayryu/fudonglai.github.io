@@ -255,3 +255,8 @@ scanf("%s", str);
 gets(str); //all will be recieved, but dangerous
 ```
 
+
+
+欢迎关注我的公众号，致力于把事情讲清楚：labuladong
+
+![公众号二维码](https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)

@@ -55,3 +55,7 @@ categories:
 另外，掂量清楚自己的分量也很必要。具体来说，我之前的目标是搞机器学习算法，因为我这个人就喜欢去挑战困难的事，而且这块大红大紫给钱多啊！但是根据分析和过来人的经验，这个目标确实有些不切实际。且不说入坑后发现这块的水有多深，竞争有多激烈，就说接触的圈子和资源直接决定起点的高度，而我的学校，专业无疑都是劣势。
 
 所以说干脆承认自己的平凡，先进了行业的门槛，再持续精进就好。本科几年在漫长的职业生涯中的只是个短暂的准备活动，首先把心态摆正，踏进起点再说。没办法赢在起跑线上，就算了，终点线才是真正的赢家嘛。
+
+欢迎关注我的公众号，致力于把事情讲清楚：labuladong
+
+![公众号二维码](https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)

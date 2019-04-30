@@ -65,3 +65,10 @@ categories:
 互联网给了无数草根逆袭的机会，那些抖音网红，人气主播都是善于抓住机会的人，不要看不起他们，能合理合法赚到钱就是本事。像我这种没法靠脸吃饭的人，也许只能通过文字输出来顺应互联网浪潮了吧。
 
 任何使自己进步的过程都是反人性的，唯一的办法就是养成习惯。我会坚持下去，也希望读者能从这篇文章中获得一点启发。
+
+
+
+欢迎关注我的公众号，致力于把事情讲清楚：labuladong
+
+![公众号二维码](https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
