@@ -117,7 +117,8 @@
 <meta property="og:description" content="交换数组的两个区域很简单吗？ 以下给出链表解法，递归解法，连续翻转，杂技解法。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://leetcode.com/media/original_images/189_Rotate_Array.png">
-<meta property="og:updated_time" content="2018-12-23T07:01:15.558Z">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2019-04-30T01:57:01.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数组旋转算法">
 <meta name="twitter:description" content="交换数组的两个区域很简单吗？ 以下给出链表解法，递归解法，连续翻转，杂技解法。">
@@ -355,12 +356,24 @@
                 
               
 
-              <time title="Created: 2018-12-23 13:19:18 / Modified: 15:01:15" itemprop="dateCreated datePublished" datetime="2018-12-23T13:19:18+08:00">2018-12-23</time>
+              <time title="Created: 2018-12-23 13:19:18" itemprop="dateCreated datePublished" datetime="2018-12-23T13:19:18+08:00">2018-12-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-30 09:57:01" itemprop="dateModified" datetime="2019-04-30T09:57:01+08:00">2019-04-30</time>
               
             
           </span>
@@ -443,6 +456,8 @@
 <p>只有看到这里的真的猛士才配拥有真正的终极算法。</p>
 <p>交换两段数据？只要分别反转这两段，再把整个数组反转就行了，不信自己数一数。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Keep it simple, stupid.</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        k %= nums.size();</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        reverse(nums.begin(), nums.begin() + n - k);</span><br><span class="line">        reverse(nums.begin() + n - k, nums.end());</span><br><span class="line">        reverse(nums.begin(), nums.end());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>欢迎关注我的公众号，致力于把事情讲清楚：labuladong</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="公众号二维码"></p>
 
       
     </div>

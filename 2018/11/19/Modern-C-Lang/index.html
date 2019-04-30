@@ -115,10 +115,12 @@
 <meta property="og:site_name" content="阿东的算法笔记">
 <meta property="og:description" content="C语言简单而隐晦的角落。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-20T06:55:13.184Z">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2019-04-30T01:57:49.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="现代C语言--I">
 <meta name="twitter:description" content="C语言简单而隐晦的角落。">
+<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 
 
 
@@ -369,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-20 14:55:13" itemprop="dateModified" datetime="2018-11-20T14:55:13+08:00">2018-11-20</time>
+                <time title="Modified: 2019-04-30 09:57:49" itemprop="dateModified" datetime="2019-04-30T09:57:49+08:00">2019-04-30</time>
               
             
           </span>
@@ -492,6 +494,8 @@
 <p>puts 接受一个参数没有格式串，写完字符串后自动添加换行符。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> str[] = <span class="string">"abcdef"</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%.3s"</span>, str); <span class="comment">// abc</span></span><br><span class="line"><span class="built_in">puts</span>(str); <span class="comment">// abcdef</span></span><br></pre></td></tr></table></figure>
 <h3 id="scanf-amp-amp-gets"><a href="#scanf-amp-amp-gets" class="headerlink" title="scanf &amp;&amp; gets"></a>scanf &amp;&amp; gets</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LEN 11</span></span><br><span class="line"><span class="keyword">char</span> str[LEN];</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%s"</span>, str);</span><br><span class="line"><span class="comment">/* input: "   hello world"*/</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">   str: 'h','e','l','l','o','\0', ...</span></span><br><span class="line"><span class="comment">   scanf never get string with space, skip blank and end at blank,</span></span><br><span class="line"><span class="comment">   and add '\0' automatically.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">gets(str); <span class="comment">//all will be recieved, but dangerous</span></span><br></pre></td></tr></table></figure>
+<p>欢迎关注我的公众号，致力于把事情讲清楚：labuladong</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="公众号二维码"></p>
 
       
     </div>

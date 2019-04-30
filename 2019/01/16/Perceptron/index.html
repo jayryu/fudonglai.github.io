@@ -117,7 +117,8 @@
 <meta property="og:description" content="纸上得来终觉浅，绝知此事要躬行，只有亲自实现一个简单的感知机，遇到各种突发奇想的疑问然后尝试解决，才能真正掌握原理。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://github.com/fudonglai/merge_reponsitories/blob/master/perceptron.png?raw=true">
-<meta property="og:updated_time" content="2019-01-16T04:19:14.676Z">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:updated_time" content="2019-04-30T01:57:19.204Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="感知机">
 <meta name="twitter:description" content="纸上得来终觉浅，绝知此事要躬行，只有亲自实现一个简单的感知机，遇到各种突发奇想的疑问然后尝试解决，才能真正掌握原理。">
@@ -355,12 +356,24 @@
                 
               
 
-              <time title="Created: 2019-01-16 10:46:07 / Modified: 12:19:14" itemprop="dateCreated datePublished" datetime="2019-01-16T10:46:07+08:00">2019-01-16</time>
+              <time title="Created: 2019-01-16 10:46:07" itemprop="dateCreated datePublished" datetime="2019-01-16T10:46:07+08:00">2019-01-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-30 09:57:19" itemprop="dateModified" datetime="2019-04-30T09:57:19+08:00">2019-04-30</time>
               
             
           </span>
@@ -427,6 +440,8 @@
 <p>用 <code>sklearn</code> 包中 <code>iris</code> 数据集作为测试数据集，一系列处理后画图<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">perceptron = Model(<span class="number">2</span>, <span class="number">0.01</span>)</span><br><span class="line">perceptron.fit(X, y)</span><br><span class="line">x_points = np.linspace(<span class="number">4</span>, <span class="number">7</span>, <span class="number">10</span>)</span><br><span class="line">y_points = <span class="number">-1</span>*(perceptron.w[<span class="number">0</span>] * x_points + perceptron.b)/perceptron.w[<span class="number">1</span>]</span><br></pre></td></tr></table></figure></p>
 <p><img src="https://github.com/fudonglai/merge_reponsitories/blob/master/perceptron.png?raw=true" alt="perceptron"></p>
 <h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>在处理数据，将输出空间的数据改成 -1 和 +1 的时候，我在纠结到底应该是在超平面以上是 +1 还是以下是 +1，事实证明都可以，因为参数会自动调整，只要跟着梯度的方向走就行了。</p>
+<p>欢迎关注我的公众号，致力于把事情讲清楚：labuladong</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/map09icNxZ4k1unaMOseLDCmx5DJDLmfic3TOYvCgzQFlbSLH12nGbxuAwShrERfLV5k70dLPjUCwVNmUjzQib9dQ/640?wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="公众号二维码"></p>
 
       
     </div>
